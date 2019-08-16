@@ -1,6 +1,6 @@
 # MongoDB learning
 
-[![Build Status](https://travis-ci.com/Birdi7/mongo_testing.svg?branch=master)](https://travis-ci.com/Birdi7/mongo_testing)
+[![Build Status](https://travis-ci.org/BikTracker/mongo_testing.svg?branch=master)](https://travis-ci.org/BikTracker/mongo_testing)
 
 ## How to use
 This repo uses [Travis CI](https://travis-ci.com/) for the CI purposes. Tests are written with pytest and mongomock
