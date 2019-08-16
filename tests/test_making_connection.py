@@ -81,6 +81,12 @@ class TestBasicConnection:
         assert get_client(server_name, port) is client1
 
     @my_params
+    def test_2_clients(self, server_name, port):
+        client1 = get_client(server_name, port)
+        client2 = get_client("new.server.name", 3423)
+        assert client1 is not client2
+
+    @my_params
     @mongomock.patch(servers=sockets)
     def test_creating_db_and_collections_insert_one(self, server_name, port, test_data):
         db_names = [f"test_db_{i}" for i in range(4)]
@@ -107,13 +113,8 @@ class TestCRUD:
 
     @mongomock.patch(servers=sockets)
     def test_insert_many(self, mock_mongo, all_test_data):
-        _ids = [random.randint(1, 1230242) for i in range(len(all_test_data))]
-        all_test_data = [
-            data.update({"_id": ObjectId(_ids[i])})
-            for i, data in enumerate(all_test_data)
-        ]
         result = insert_many(mock_mongo, all_test_data)
-        assert len(result.inserted_ids) == len(_ids)
+        assert len(result.inserted_ids) == len(all_test_data)
 
     @my_params
     @mongomock.patch(servers=sockets)
